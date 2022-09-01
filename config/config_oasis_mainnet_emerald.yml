@@ -1,0 +1,124 @@
+# Set this to where you wish to store node data. The node's artifacts
+# should also be located in this directory.
+datadir: /node/data
+
+# Logging.
+#
+# Per-module log levels are defined below. If you prefer just one unified log
+# level, you can use:
+#
+# log:
+#   level: debug
+log:
+  level:
+    # Per-module log levels. Longest prefix match will be taken. Fallback to
+    # "default", if no match.
+    #default: error
+    default: info
+    tendermint: info
+    tendermint/context: error
+    
+#  format: JSON
+  format: logfmt
+  # By default logs are output to stdout. If you would like to output logs to
+  # a file, you can use:
+  #
+  # file: /var/log/oasis-node.log
+
+# Genesis.
+genesis:
+  # Path to the genesis file for the current version of the network.
+  file: /node/etc/genesis.json
+
+
+# Consensus backend.
+consensus:
+  # Setting this to true will mean that the node you're deploying will attempt
+ # to register as a validator.
+  #validator: true
+
+# Tendermint backend configuration.
+  tendermint:
+    abci:
+      prune:
+      # NOTE: If you join the network at a later time, use the following
+      # configuration to speed up the syncing of your node:
+      #
+      # strategy: none
+      #
+      # WARNING: Use this carefully. Turning pruning back on slows you down
+      # again and not turning it on means you will eventually fill all the
+      # storage on your node.
+      # See https://github.com/oasislabs/oasis-core/issues/2432 for more
+      # details.
+        strategy: keep_n
+        num_kept: 86400
+
+    core:
+      listen_address: tcp://0.0.0.0:46656
+
+    # The external IP that is used when registering this node to the network.
+    # NOTE: If you are using the Sentry node setup, this option should be
+    # omitted.
+      external_address: tcp://0.0.0.0:46656
+
+    #db:
+    #  backend: badger
+    #debug:
+    #  addr_book_lenient: false
+  # List of seed nodes to connect to.
+  # NOTE: You can add additional seed nodes to this list if you want.
+
+    p2p:
+      seed:
+        - "E27F6B7A350B4CC2B48A6CBE94B0A02B0DCB0BF3@35.199.49.168:26656"
+        - "9e735e40cade7e11b9d54798eabf81f1d820b126@95.179.184.145:26656"
+        - "85d37b8e336331d0fd9d4fdbb28ab407afe70924@52.252.232.158:26656"
+        - "8a594ccee8f924417aa4b520b9fd6480a5279644@44.228.30.87:26656"
+        - "e7f2cc051c84b13eb0d92b825f282ea73cabbfea@44.235.81.175:26656"
+        - "ed79e9d9395ad9a5349a59c26b9810a2dda59223@52.159.79.124:26656"
+        - "9b608c52c56f1fefb7892c9b9ee71d35901aaa20@3.34.119.21:26656"
+        - "f4a93c15784d9f194a586e99dd769ed1fd428b79@144.217.253.124:26656"
+        - "b8994b04adf1393b4957ccfd3406361455046897@159.69.59.60:26656"
+        - "bb9c922f2053f34573d8abad872c7eb4f34d9ed6@119.13.81.184:26656"
+        - "4b09be0737402c8bc3bfce0424e0e082e4e8c207@23.88.56.166:26656"
+        - "0d8b2a311c5089230f9c1aacb925682fd64eabe4@13.125.182.16:26656"
+        - "ffaba6bca2179ac41efe302e71659f9d63c99168@217.160.95.75:26656"
+        - "3cc19a3fde93e22ce954c223aaf54c5e2e84cd32@142.132.213.82:26656"
+        - "ca0e733b946ef09491e2ad26f5425c404465b774@80.64.211.67:26656"
+        - "8494b213b539acc0b9cfa9cd1c92a7e80f75f745@116.202.174.169:26656"
+        - "0ff03a6d3e3bfe6367a024a862237bfb22d40150@54.203.41.63:26656"
+        - "26e6d5b1f2cb4bb0237f4d746784408c24e914ec@135.181.77.134:26656"
+        - "f5f83e6e6dcc6a7d5b9db5191cc4e923465beb49@135.181.98.191:26656"
+        - "24504377064942404ecfb3bb710fa348f4ef01b1@3.130.100.157:26656"
+        - "7f15a02746a0f0580e908478bf76263ebc6546db@142.132.252.32:26656"
+        
+
+      max_num_inbound_peers: "60"
+      max_num_outbound_peers: "40"
+
+
+metrics:
+  address: "127.0.0.1:4000"
+  mode: pull
+
+runtime:
+  mode: compute
+  paths:
+     - /node/runtimes/emerald-paratime.orc
+
+# Worker configuration.
+worker:
+  registration:
+    # In order for the node to register itself, the entity.json of the entity
+    # used to provision the node must be available on the node.
+    entity: /node/data/entity/entity.json
+
+  p2p:
+    # External P2P configuration.
+    port: 40002
+    addresses:
+      # The external IP that is used when registering this node to the network.
+      - "EXTERNAL_IP:40002"
+
+
