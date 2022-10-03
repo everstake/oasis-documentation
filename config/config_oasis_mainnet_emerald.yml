@@ -55,12 +55,12 @@ consensus:
         num_kept: 86400
 
     core:
-      listen_address: tcp://0.0.0.0:46656
+      listen_address: tcp://0.0.0.0:26656
 
     # The external IP that is used when registering this node to the network.
     # NOTE: If you are using the Sentry node setup, this option should be
     # omitted.
-      external_address: tcp://0.0.0.0:46656
+      external_address: tcp://0.0.0.0:26656
 
     #db:
     #  backend: badger
@@ -99,7 +99,7 @@ consensus:
 
 
 metrics:
-  address: "127.0.0.1:4000"
+  address: "127.0.0.1:3000"
   mode: pull
 
 runtime:
@@ -116,9 +116,9 @@ worker:
 
   p2p:
     # External P2P configuration.
-    port: 40002
+    port: 30002
     addresses:
       # The external IP that is used when registering this node to the network.
-      - "EXTERNAL_IP:40002"
+      - "EXTERNAL_IP:30002"
 
 
