@@ -358,7 +358,7 @@ output:
 oasis1qz7rce6dmnh9qtr9nltsyy69d69j3a95rqm3jmxw
 
 #See Account state from address( in this example, we see information after registration validator & self delegation, when we do this command fist time , we see only balance), also we need nonce, 
-$OASIS_PATH/oasis-node stake account info -a unix:$PATH_OAIS/node/internal.sock --stake.account.address oasis1qz7rce6dmnh9qtr9nltsyy69d69j3a95rqm3jmxw
+$OASIS_PATH/oasis-node stake account info -a unix:$OASIS_PATH/node/internal.sock --stake.account.address oasis1qz7rce6dmnh9qtr9nltsyy69d69j3a95rqm3jmxw
 output:
   Account State for Height: 10071252
   Balance:
